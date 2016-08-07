@@ -14,7 +14,7 @@ namespace WebDeveloper.Controllers
         private PersonRepository _person = new PersonRepository();
         public ActionResult Index()
         {
-            return View(_person.GetList());
+            return View(_person.GetListBySize(15));
         }
 
         public ActionResult Create()
@@ -26,6 +26,14 @@ namespace WebDeveloper.Controllers
         public ActionResult Create(Person person)
         {
             if (!ModelState.IsValid) return View(person);
+            person.rowguid = Guid.NewGuid();
+            person.ModifiedDate = DateTime.Now;
+            person.BusinessEntity = new BusinessEntity
+            {
+                rowguid = person.rowguid,
+                ModifiedDate = DateTime.Now
+            };
+
             _person.Add(person);
             return RedirectToAction("Index");
         }
@@ -56,10 +64,19 @@ namespace WebDeveloper.Controllers
         [HttpPost]
         public ActionResult Delete(Person person)
         {
-            if (!ModelState.IsValid) return View(person);
+            //if (!ModelState.IsValid) return View(person);
+            person = _person.GetById(person.BusinessEntityID);
             _person.Delete(person);
             return RedirectToAction("Index");
         }
 
+
+        public ActionResult Details(int id)
+        {
+            var person = _person.GetById(id);
+            if (person == null) return RedirectToAction("Index");
+            return View(person);
+
+        }
     }
 }
