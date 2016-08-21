@@ -20,20 +20,19 @@
                     @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 </div>
                 <nav class="navbar-collapse collapse">
-                    @*
-                       
-                        @Html.ActionLink("About", "About", "Home")
-                        @Html.ActionLink("Contact", "Contact", "Home")
-                    *@
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Person", "Index", "Person", new { area = "Personnel" }, null)</li>
-                        <li>@Html.ActionLink("Address", "Index", "Address", new { area = "Personnel" }, null)</li>
-                        <li>@Html.ActionLink("BusinessEntity", "Index", "BusinessEntity", new { area = "Personnel" }, null)</li>
-                        <li>@Html.ActionLink("BusinessEntityAddress", "Index", "BusinessEntityAddress", new { area = "Personnel" }, null)</li>
-                        <li>@Html.ActionLink("BusinessEntityContact", "Index", "BusinessEntityContact", new { area = "Personnel" }, null)</li>
-                        <li>@Html.ActionLink("EmailAddress", "Index", "EmailAddress", new { area = "Personnel" }, null)</li>
-                        <li>@Html.ActionLink("PersonPhone", "Index", "PersonPhone", new { area = "Personnel" }, null)</li>
-                    </ul>
+                    @if(Request.IsAuthenticated)
+                    { 
+                        <ul class="nav navbar-nav">
+                            <li>@Html.ActionLink("Person", "Index", new { area = "Personnel", Controller = "Person" })</li>
+                            <li>@Html.ActionLink("Address", "Index", "Address", new { area = "Personnel" }, null)</li>
+                            <li>@Html.ActionLink("BusinessEntity", "Index", "BusinessEntity", new { area = "Personnel" }, null)</li>
+                            <li>@Html.ActionLink("BusinessEntityAddress", "Index", "BusinessEntityAddress", new { area = "Personnel" }, null)</li>
+                            <li>@Html.ActionLink("BusinessEntityContact", "Index", "BusinessEntityContact", new { area = "Personnel" }, null)</li>
+                            <li>@Html.ActionLink("EmailAddress", "Index", "EmailAddress", new { area = "Personnel" }, null)</li>
+                            <li>@Html.ActionLink("PersonPhone", "Index", "PersonPhone", new { area = "Personnel" }, null)</li>
+                        </ul>
+                    }
+                    @Html.Partial("_LoginPartial")
                 </nav>
             </div>
         </div>

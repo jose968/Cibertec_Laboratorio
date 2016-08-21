@@ -10,14 +10,12 @@ using WebDeveloper.Repository;
 
 namespace WebDeveloper.Areas.Personnel.Controllers
 {
-    [AuditControl]
-    public class AddressController : Controller
+    public class AddressController : PersonBaseController<Address>
     {
         // GET: AddressArea/Address
-        private AddressRepository _address = new AddressRepository();
         public ActionResult Index()
         {
-            return View(_address.GetListBySize(15));
+            return View(_repository.PaginatedList((x=>x.ModifiedDate),2,30));
         }
 
         public ActionResult Create()
@@ -37,13 +35,13 @@ namespace WebDeveloper.Areas.Personnel.Controllers
             //    ModifiedDate = DateTime.Now
             //};
 
-            _address.Add(address);
+            _repository.Add(address);
             return RedirectToAction("Index");
         }
 
         public ActionResult Edit(int id)
         {
-            var address = _address.GetById(id);
+            var address = _repository.GetById(x => x.AddressID == id);
             if (address == null) return RedirectToAction("Index");
             return View(address);
         }
@@ -52,14 +50,14 @@ namespace WebDeveloper.Areas.Personnel.Controllers
         public ActionResult Edit(Address address)
         {
             if (!ModelState.IsValid) return View(address);
-            _address.Update(address);
+            _repository.Update(address);
             return RedirectToAction("Index");
         }
 
 
         public ActionResult Delete(int id)
         {
-            var address = _address.GetById(id);
+            var address = _repository.GetById(x => x.AddressID == id);
             if (address == null) return RedirectToAction("Index");
             return View(address);
         }
@@ -68,15 +66,15 @@ namespace WebDeveloper.Areas.Personnel.Controllers
         public ActionResult Delete(Address address)
         {
             //if (!ModelState.IsValid) return View(person);
-            address = _address.GetById(address.AddressID);
-            _address.Delete(address);
+            address = _repository.GetById(x => x.AddressID == address.AddressID);
+            _repository.Delete(address);
             return RedirectToAction("Index");
         }
 
 
         public ActionResult Details(int id)
         {
-            var address = _address.GetById(id);
+            var address = _repository.GetById(x => x.AddressID == id);
             if (address == null) return RedirectToAction("Index");
             return View(address);
 
