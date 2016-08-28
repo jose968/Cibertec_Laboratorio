@@ -9,6 +9,7 @@ namespace WebDeveloper.Controllers
 {
     [AuditControl]
     [ExceptionControl]
+    [RequireHttps]
     public class HomeController : Controller
     {
         public ActionResult Index()
