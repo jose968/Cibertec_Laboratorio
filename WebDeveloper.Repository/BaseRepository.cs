@@ -40,6 +40,11 @@ namespace WebDeveloper.Repository
                 return db.Set<T>().ToList();
         }
 
+        public IEnumerable<T> ListById(Expression<Func<T, bool>> match)
+        {
+            return db.Set<T>().Where(match);
+        }
+
         public IEnumerable<T> OrderedListByDateAndSize(Expression<Func<T, DateTime>> match, int size)
         {
             return db.Set<T>().OrderByDescending(match).Take(size);

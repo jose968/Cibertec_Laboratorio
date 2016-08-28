@@ -20,5 +20,7 @@ namespace WebDeveloper.Repository
 
         IEnumerable<T> PaginatedList(Expression<Func<T, DateTime>> match, int page, int size);
 
+        IEnumerable<T> ListById(Expression<Func<T, bool>> match);
+
     }
 }
