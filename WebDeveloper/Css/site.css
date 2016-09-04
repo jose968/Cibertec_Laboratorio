@@ -12,3 +12,6 @@ footer {
   right: 0;
   text-align: center; }
 
+dd {
+  word-wrap: break-word; }
+
