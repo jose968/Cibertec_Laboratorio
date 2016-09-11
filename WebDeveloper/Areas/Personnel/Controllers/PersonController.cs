@@ -28,6 +28,15 @@ namespace WebDeveloper.Areas.Personnel.Controllers
             return PartialView("_List",_repository.PaginatedList(x => x.ModifiedDate, page.Value, size.Value));
         }
 
+        public int PageTotal(int rows)
+        {
+            if (rows <= 0) return 0;
+
+            var count = _repository.GetList().Count;
+
+            return count % rows > 0 ? (count / rows) + 1 : count /rows;
+           
+        }
 
         public ActionResult Create()
         {
