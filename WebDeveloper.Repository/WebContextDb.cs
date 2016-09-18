@@ -13,6 +13,9 @@ namespace WebDeveloper.Repository
     {
         public WebContextDb(): base("WebDeveloperConnectionString")
         {
+            Database.SetInitializer<WebContextDb>(null);
+            Configuration.LazyLoadingEnabled = false;
+            Configuration.ProxyCreationEnabled = false;
         }
 
 
