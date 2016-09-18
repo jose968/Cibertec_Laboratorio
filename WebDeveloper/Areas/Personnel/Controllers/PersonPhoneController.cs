@@ -13,6 +13,12 @@ namespace WebDeveloper.Areas.Personnel.Controllers
     public class PersonPhoneController : PersonBaseController<PersonPhone>
     {
         // GET: Personnel/PersonPhone
+
+        public PersonPhoneController(IRepository<PersonPhone> repository)
+            :base(repository)
+        {
+
+        }
         public ActionResult Index()
         {
             return View();

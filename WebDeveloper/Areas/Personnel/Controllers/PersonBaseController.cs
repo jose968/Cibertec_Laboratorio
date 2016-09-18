@@ -15,10 +15,10 @@ namespace WebDeveloper.Areas.Personnel.Controllers
     {
         // GET: Personnel/PersonBase
         protected IRepository<T> _repository;
-
-        public PersonBaseController()
+        
+        public PersonBaseController(IRepository<T> repository)
         {
-            _repository = new BaseRepository<T>();
+            _repository = repository;
         }
     }
 }

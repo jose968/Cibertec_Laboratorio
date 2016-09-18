@@ -14,6 +14,7 @@ namespace WebDeveloper.Areas.Personnel.Controllers
     {
         // GET: Personnel/BusinessEntityAddress
         private BusinessEntityAddressRepository _businessentityaddress = new BusinessEntityAddressRepository();
+
         public ActionResult Index()
         {
             return View(_businessentityaddress.GetListBySize(15));

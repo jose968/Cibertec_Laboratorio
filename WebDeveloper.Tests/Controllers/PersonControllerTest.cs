@@ -8,6 +8,7 @@ using Xunit;
 using FluentAssertions;
 using System.Web.Mvc;
 using WebDeveloper.Model;
+using WebDeveloper.Repository;
 
 namespace WebDeveloper.Tests.Controllers
 {
@@ -17,7 +18,7 @@ namespace WebDeveloper.Tests.Controllers
 
         public PersonControllerTest()
         {
-            controller = new PersonController();
+            controller = new PersonController(new BaseRepository<Person>());
         }
 
         [Fact(DisplayName = "ListActionWithEmptyParameters")]

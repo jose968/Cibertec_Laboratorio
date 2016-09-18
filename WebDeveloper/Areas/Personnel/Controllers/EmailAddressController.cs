@@ -13,6 +13,13 @@ namespace WebDeveloper.Areas.Personnel.Controllers
     public class EmailAddressController : PersonBaseController<EmailAddress>
     {
         // GET: Personnel/EmailAddress
+
+        public EmailAddressController(IRepository<EmailAddress> repository)
+            :base(repository)
+        {
+
+        }
+
         public ActionResult Index()
         {
             return View();
