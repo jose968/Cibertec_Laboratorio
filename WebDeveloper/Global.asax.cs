@@ -18,7 +18,6 @@ namespace WebDeveloper
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             log4net.Config.XmlConfigurator.Configure();
-            
         }
     }
 }

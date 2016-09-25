@@ -1,39 +1,14 @@
-﻿
-
+﻿var pageSize = 0;
 var rowsByPage = 15;
-var totalPage = 1;
 var currentPage = 1;
 
-
-var baseUrl = '';
-
 $(function () {
-    baseUrl = document.getElementById("baseUrl").value;
-    goToPage(1);
-    getTotalPage();
-})
-
-
-function goToPage(page) {
-    var finalUrl = baseUrl + "/List?page=" + page + "&size" + rowsByPage;
-    $.get(finalUrl, function (data) {
-        $('#personContent').html(data);
-        currentPage = page;
-    })
-}
-
-
-function getTotalPage() {
-    var finalUrl = baseUrl + "/PageTotal?rows=" + rowsByPage;
-    $.get(finalUrl, function (data) {
-        totalPage = data;
-        setPaginator();
-    })
-}
+    calculateNumberOfPages(rowsByPage);
+});
 
 function setPaginator() {
     $(".paginator").bootpag({
-        total: totalPage,
+        total: pageSize,
         page: 1,
         maxVisible: 5,
         leaps: true,
@@ -49,26 +24,33 @@ function setPaginator() {
         firstClass: 'first'
     }).on("page", function (event, num) {
         goToPage(num);
-
+        $(this).bootpag({ total: pageSize });
     });
-
 }
 
-
+function goToPage(page) {
+    fullUrl = listAction + "?page=" + page + "&size=" + rowsByPage;
+    $.get(fullUrl, function (data) {
+        $('#personContent').html(data);
+        currentPage = page;
+    });
+}
 
 function changeSize() {
-    rowsByPage = document.getElementById('rowsByPage').value;
-    if (rowsByPage) {
-        getTotalPage();
-        getTotalPage(1);
-    }
-        
-
+    rowsByPage = $("#rowsByPage").val();
+    if (rowsByPage)
+        calculateNumberOfPages(rowsByPage);
 }
 
+function calculateNumberOfPages(rowsByPage) {
+    var url = pageSizeAction + '?pageSize=' + rowsByPage;
+    $.get(url, function (data) {
+        pageSize = data;
+        setPaginator();
+        goToPage(1);
+    });    
+}
 
-function updatePage() {
+function reloadPage() {
     goToPage(currentPage);
-
 }
-

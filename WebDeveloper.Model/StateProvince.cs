@@ -1,14 +1,16 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
+
 namespace WebDeveloper.Model
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-
+    
     [Table("Person.StateProvince")]
+    [ExcludeFromCodeCoverage]
     public partial class StateProvince
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public StateProvince()
         {
             Address = new HashSet<Address>();
@@ -36,7 +38,6 @@ namespace WebDeveloper.Model
 
         public DateTime ModifiedDate { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Address> Address { get; set; }
 
         public virtual CountryRegion CountryRegion { get; set; }

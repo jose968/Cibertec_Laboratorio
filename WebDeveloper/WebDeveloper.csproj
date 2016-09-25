@@ -18,7 +18,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>44395</IISExpressSSLPort>
+    <IISExpressSSLPort>44318</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
@@ -183,13 +183,22 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\Startup.Injector.cs" />
     <Compile Include="Areas\Personnel\Controllers\AddressController.cs" />
+    <Compile Include="Areas\Personnel\Controllers\AddressTypeController.cs" />
     <Compile Include="Areas\Personnel\Controllers\BusinessEntityAddressController.cs" />
     <Compile Include="Areas\Personnel\Controllers\BusinessEntityContactController.cs" />
     <Compile Include="Areas\Personnel\Controllers\BusinessEntityController.cs" />
+    <Compile Include="Areas\Personnel\Controllers\ContactTypeController.cs" />
+    <Compile Include="Areas\Personnel\Controllers\CountryRegionController.cs" />
     <Compile Include="Areas\Personnel\Controllers\EmailAddressController.cs" />
+    <Compile Include="Areas\Personnel\Controllers\PasswordController.cs" />
     <Compile Include="Areas\Personnel\Controllers\PersonBaseController.cs" />
     <Compile Include="Areas\Personnel\Controllers\PersonPhoneController.cs" />
+    <Compile Include="Areas\Personnel\Controllers\PhoneNumberTypeController.cs" />
+    <Compile Include="Areas\Personnel\Controllers\PictureController.cs" />
+    <Compile Include="Areas\Personnel\Controllers\StateProvinceController.cs" />
+    <Compile Include="Areas\Personnel\Models\PictureViewModel.cs" />
     <Compile Include="Areas\Personnel\PersonnelAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -203,10 +212,12 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Areas\Personnel\Models\PersonViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Personnel\Scripts\FileUpload.js" />
     <Content Include="Areas\Personnel\Scripts\Person.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -227,38 +238,12 @@
     <Content Include="Areas\Personnel\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Personnel\Views\Address\Index.cshtml" />
     <Content Include="Areas\Personnel\Views\Address\Create.cshtml" />
-    <Content Include="Areas\Personnel\Views\Address\Edit.cshtml" />
     <Content Include="Areas\Personnel\Views\Address\Delete.cshtml" />
     <Content Include="Areas\Personnel\Views\Address\Details.cshtml" />
-    <Content Include="Areas\Personnel\Views\BusinessEntityContact\Index.cshtml" />
-    <Content Include="Areas\Personnel\Views\BusinessEntityContact\Create.cshtml" />
-    <Content Include="Areas\Personnel\Views\BusinessEntityContact\Edit.cshtml" />
-    <Content Include="Areas\Personnel\Views\BusinessEntityContact\Delete.cshtml" />
-    <Content Include="Areas\Personnel\Views\BusinessEntityContact\Details.cshtml" />
-    <Content Include="Areas\Personnel\Views\BusinessEntity\Index.cshtml" />
-    <Content Include="Areas\Personnel\Views\BusinessEntity\Create.cshtml" />
-    <Content Include="Areas\Personnel\Views\BusinessEntity\Edit.cshtml" />
-    <Content Include="Areas\Personnel\Views\BusinessEntity\Delete.cshtml" />
-    <Content Include="Areas\Personnel\Views\BusinessEntity\Details.cshtml" />
-    <Content Include="Areas\Personnel\Views\EmailAddress\Index.cshtml" />
-    <Content Include="Areas\Personnel\Views\EmailAddress\Create.cshtml" />
-    <Content Include="Areas\Personnel\Views\EmailAddress\Edit.cshtml" />
-    <Content Include="Areas\Personnel\Views\EmailAddress\Delete.cshtml" />
-    <Content Include="Areas\Personnel\Views\EmailAddress\Details.cshtml" />
-    <Content Include="Areas\Personnel\Views\PersonPhone\Index.cshtml" />
-    <Content Include="Areas\Personnel\Views\PersonPhone\Create.cshtml" />
-    <Content Include="Areas\Personnel\Views\PersonPhone\Edit.cshtml" />
-    <Content Include="Areas\Personnel\Views\PersonPhone\Delete.cshtml" />
-    <Content Include="Areas\Personnel\Views\PersonPhone\Details.cshtml" />
-    <Content Include="Areas\Personnel\Views\BusinessEntityAddress\Index.cshtml" />
-    <Content Include="Areas\Personnel\Views\BusinessEntityAddress\Create.cshtml" />
-    <Content Include="Areas\Personnel\Views\BusinessEntityAddress\Edit.cshtml" />
-    <Content Include="Areas\Personnel\Views\BusinessEntityAddress\Delete.cshtml" />
-    <Content Include="Areas\Personnel\Views\BusinessEntityAddress\Details.cshtml" />
+    <Content Include="Areas\Personnel\Views\Address\Edit.cshtml" />
     <Content Include="Areas\Personnel\Views\EmailAddress\_Email.cshtml" />
-    <Content Include="Areas\Personnel\Views\PersonPhone\_Phone.cshtml" />
     <Content Include="Areas\Personnel\Views\Person\_List.cshtml" />
-    <Compile Include="App_Start\Startup.Injector.cs" />
+    <Content Include="Areas\Personnel\Views\Picture\FileUpload.cshtml" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
@@ -277,7 +262,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\Shared\modal.js" />
+    <Content Include="Scripts\Shared\Modal.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -290,8 +275,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="scss\styles.scss" />
@@ -305,13 +288,21 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="scss\bootstrap\_modal.scss" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Personnel\Models\" />
-    <Folder Include="Areas\Personnel\Views\PersonBase\" />
+    <Folder Include="Areas\Personnel\Views\AddressType\" />
+    <Folder Include="Areas\Personnel\Views\BusinessEntityAddress\" />
+    <Folder Include="Areas\Personnel\Views\BusinessEntityContact\" />
+    <Folder Include="Areas\Personnel\Views\BusinessEntity\" />
+    <Folder Include="Areas\Personnel\Views\ContactType\" />
+    <Folder Include="Areas\Personnel\Views\CountryRegion\" />
+    <Folder Include="Areas\Personnel\Views\Password\" />
+    <Folder Include="Areas\Personnel\Views\PersonPhone\" />
+    <Folder Include="Areas\Personnel\Views\PhoneNumberType\" />
     <Folder Include="Areas\Personnel\Views\Shared\" />
-    <Folder Include="scss\bootstrap\" />
+    <Folder Include="Areas\Personnel\Views\StateProvince\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -323,11 +314,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebDeveloper.Model\WebDeveloper.Model.csproj">
-      <Project>{5f2a98eb-5092-4f45-aba0-7fc2463a3756}</Project>
+      <Project>{8a219854-f40b-4e3a-9723-f144a425f135}</Project>
       <Name>WebDeveloper.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\WebDeveloper.Repository\WebDeveloper.Repository.csproj">
-      <Project>{ea0286a6-669e-4880-84f1-fd060cbf617e}</Project>
+      <Project>{91ce4695-5e4d-4b19-994b-177107d75f62}</Project>
       <Name>WebDeveloper.Repository</Name>
     </ProjectReference>
   </ItemGroup>

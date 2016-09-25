@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using WebDeveloper.Filters;
 using WebDeveloper.Repository;
 
 namespace WebDeveloper.Areas.Personnel.Controllers
-{
-    [Authorize]
+{   
+    [Authorize] 
     [ExceptionControl]
-    public class PersonBaseController<T> : Controller
-            where T:class
+    [OutputCache(Duration =0)]
+    public class PersonBaseController<T> : Controller where T: class 
     {
-        // GET: Personnel/PersonBase
-        protected IRepository<T> _repository;
-        
+        protected IRepository<T>  _repository;
         public PersonBaseController(IRepository<T> repository)
         {
             _repository = repository;

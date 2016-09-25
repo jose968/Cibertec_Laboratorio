@@ -1,14 +1,15 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
+
 namespace WebDeveloper.Model
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-
+    [ExcludeFromCodeCoverage]
     [Table("Person.Address")]
     public partial class Address
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Address()
         {
             BusinessEntityAddress = new HashSet<BusinessEntityAddress>();
@@ -32,14 +33,13 @@ namespace WebDeveloper.Model
         [Required]
         [StringLength(15)]
         public string PostalCode { get; set; }
-
+                
         public Guid rowguid { get; set; }
 
         public DateTime ModifiedDate { get; set; }
 
         public virtual StateProvince StateProvince { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BusinessEntityAddress> BusinessEntityAddress { get; set; }
     }
 }

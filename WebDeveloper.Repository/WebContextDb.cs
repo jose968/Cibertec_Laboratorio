@@ -6,18 +6,19 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using WebDeveloper.Model;
+using System.Diagnostics.CodeAnalysis;
 
 namespace WebDeveloper.Repository
 {
+    [ExcludeFromCodeCoverage]
     public class WebContextDb : DbContext
     {
-        public WebContextDb(): base("WebDeveloperConnectionString")
+        public WebContextDb(): base("WebDeveloper")
         {
             Database.SetInitializer<WebContextDb>(null);
             Configuration.LazyLoadingEnabled = false;
             Configuration.ProxyCreationEnabled = false;
         }
-
 
         public virtual DbSet<Address> Address { get; set; }
         public virtual DbSet<AddressType> AddressType { get; set; }
@@ -32,6 +33,7 @@ namespace WebDeveloper.Repository
         public virtual DbSet<PersonPhone> PersonPhone { get; set; }
         public virtual DbSet<PhoneNumberType> PhoneNumberType { get; set; }
         public virtual DbSet<StateProvince> StateProvince { get; set; }
+        public virtual DbSet<Picture> Picture { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -108,6 +110,10 @@ namespace WebDeveloper.Repository
                 .WithRequired(e => e.PhoneNumberType)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Picture>()
+                .Property(e => e.ImagePath)
+                .IsUnicode(false);
+
             modelBuilder.Entity<StateProvince>()
                 .Property(e => e.StateProvinceCode)
                 .IsFixedLength();
@@ -117,9 +123,5 @@ namespace WebDeveloper.Repository
                 .WithRequired(e => e.StateProvince)
                 .WillCascadeOnDelete(false);
         }
-        
-
-
-
     }
 }

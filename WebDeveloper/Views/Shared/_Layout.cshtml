@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Aplicación HTML5</title>
+    <title>Cibertec Web Developer 2016</title>
     @Scripts.Render("~/bundles/jquery")    
     @Scripts.Render("~/bundles/modernizr")  
     @Styles.Render("~/Content/css")
@@ -17,19 +17,17 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Cibertec - Web Developer", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 </div>
-                <nav class="navbar-collapse collapse">
-                    @if(Request.IsAuthenticated)
-                    { 
+                <nav class="navbar-collapse collapse">                    
+                    @if (Request.IsAuthenticated)
+                    {
                         <ul class="nav navbar-nav">
-                            <li>@Html.ActionLink("Person", "Index", new { area = "Personnel", Controller = "Person" })</li>
-                            <li>@Html.ActionLink("Address", "Index", "Address", new { area = "Personnel" }, null)</li>
-                            <li>@Html.ActionLink("BusinessEntity", "Index", "BusinessEntity", new { area = "Personnel" }, null)</li>
-                            <li>@Html.ActionLink("BusinessEntityAddress", "Index", "BusinessEntityAddress", new { area = "Personnel" }, null)</li>
-                            <li>@Html.ActionLink("BusinessEntityContact", "Index", "BusinessEntityContact", new { area = "Personnel" }, null)</li>
-                            @*<li>@Html.ActionLink("EmailAddress", "Index", "EmailAddress", new { area = "Personnel" }, null)</li>
-                            <li>@Html.ActionLink("PersonPhone", "Index", "PersonPhone", new { area = "Personnel" }, null)</li>*@
+                            <li>@Html.ActionLink("Person",
+                                                 "Index",
+                                                 new { area= "Personnel",
+                                                       controller="Person"
+                                                 })</li>                        
                         </ul>
                     }
                     @Html.Partial("_LoginPartial")

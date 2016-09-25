@@ -1,14 +1,15 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
+
 namespace WebDeveloper.Model
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-
     [Table("Person.AddressType")]
+    [ExcludeFromCodeCoverage]
     public partial class AddressType
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public AddressType()
         {
             BusinessEntityAddress = new HashSet<BusinessEntityAddress>();
@@ -24,7 +25,6 @@ namespace WebDeveloper.Model
 
         public DateTime ModifiedDate { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BusinessEntityAddress> BusinessEntityAddress { get; set; }
     }
 }

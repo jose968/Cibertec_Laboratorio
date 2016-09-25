@@ -1,13 +1,15 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
+
 namespace WebDeveloper.Model
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-
     [Table("Person.Person")]
+    [ExcludeFromCodeCoverage]
     public partial class Person
-    {
+    {        
         public Person()
         {
             BusinessEntityContact = new HashSet<BusinessEntityContact>();
@@ -19,35 +21,36 @@ namespace WebDeveloper.Model
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int BusinessEntityID { get; set; }
 
-        [Required(ErrorMessage ="This Field is Required.")]
-        [StringLength(2,ErrorMessage ="This Field is Required 2 characters.")]
-        [Display(Name = "Type")]
+        [Required(ErrorMessage ="This field is required.")]
+        [StringLength(2, ErrorMessage ="This field required 2 characters.")]
+        [Display(Name ="Type")]
         public string PersonType { get; set; }
 
         public bool NameStyle { get; set; }
 
-        [StringLength(8,ErrorMessage ="This Field is Required 8 characters.")]
+        [StringLength(8)]
         public string Title { get; set; }
 
-        [Required(ErrorMessage = "This Field is Required.")]
-        [StringLength(50, ErrorMessage = "This Field is Required 50 characters.")]
+        [Required(ErrorMessage = "This First Name is required.")]
+        [StringLength(50, ErrorMessage = "Max 50 characters.")]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
-        [StringLength(50, ErrorMessage = "This Field is Required 50 characters.")]
+        [StringLength(50, ErrorMessage = "Max 50 characters.")]
         [Display(Name = "Middle Name")]
         public string MiddleName { get; set; }
 
-        [Required(ErrorMessage = "This Field is Required.")]
-        [StringLength(50, ErrorMessage = "This Field is Required 50 characters.")]
+        [Required(ErrorMessage = "This Last Name is required.")]
+        [StringLength(50, ErrorMessage = "Max 50 characters.")]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [StringLength(10, ErrorMessage = "This Field is Required 10 characters.")]
+        [StringLength(10)]
         public string Suffix { get; set; }
 
+        [Required(ErrorMessage = "Email Promotion is required.")]
         public int EmailPromotion { get; set; }
-
+        
         [Column(TypeName = "xml")]
         public string AdditionalContactInfo { get; set; }
 
@@ -56,10 +59,12 @@ namespace WebDeveloper.Model
 
         public Guid rowguid { get; set; }
 
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime ModifiedDate { get; set; }
 
         public virtual BusinessEntity BusinessEntity { get; set; }
-
+                
         public virtual ICollection<BusinessEntityContact> BusinessEntityContact { get; set; }
 
         public virtual ICollection<EmailAddress> EmailAddress { get; set; }

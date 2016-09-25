@@ -1,9 +1,10 @@
 ﻿@model IEnumerable<WebDeveloper.Model.EmailAddress>
 
+<h1>Emails</h1>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.EmailAddress1)
+            @Html.DisplayNameFor(model=> model.EmailAddress1)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ModifiedDate)
@@ -13,7 +14,7 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.EmailAddress1)
+                @Html.DisplayFor(modelItem=> item.EmailAddress1)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ModifiedDate)

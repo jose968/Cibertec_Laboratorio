@@ -12,6 +12,14 @@ footer {
   right: 0;
   text-align: center; }
 
-dd {
-  word-wrap: break-word; }
+.page-size {
+  padding: 20px; }
+
+.modal-header {
+  padding: 10px;
+  border-bottom: 0 solid #e5e5e5;
+  padding-bottom: 0; }
+
+.modal-body {
+  padding-top: 0; }
 
