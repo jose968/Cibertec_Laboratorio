@@ -10,7 +10,11 @@
     function personController(dataService) {
         var vm = this;
         vm.title = 'Person Controller';
+        var apiUrl = 'http://localhost/WebDeveloper.API/Person/';
         vm.personList = [];
+        vm.person;
+
+        vm.getPersonDetail = getPersonDetail;
 
         init();
 
@@ -20,7 +24,6 @@
 
         function loadData() {
             vm.personList = [];
-            var apiUrl = 'http://localhost/WebDeveloper.API/Person/';
             var url = apiUrl + 'list/1/15';
             dataService.getData(url)
                 .then(function (result) {
@@ -29,6 +32,16 @@
                 function (error) {
                     console.log(error);
                 });
+        }
+
+        function getPersonDetail(id) {
+            var url = apiUrl + id;
+            dataService.getData(url).then(
+                function (result) {
+                    vm.person = result.data;
+                }
+                );
+
         }
     }
 

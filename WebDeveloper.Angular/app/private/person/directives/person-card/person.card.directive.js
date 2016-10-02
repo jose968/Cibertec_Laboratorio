@@ -8,6 +8,7 @@
         return {
             templateUrl: 'app/private/person/directives/person-card/person-card.html',
             restrict: 'E',
+            transclude: true,
             scope: {
                 personId: '@',
                 firstName: '@',
