@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace WebDeveloper.Angular.App_Start
 {
@@ -14,19 +10,20 @@ namespace WebDeveloper.Angular.App_Start
                 .Include("~/Scripts/jquery-3.1.0.js")
                 .Include("~/Scripts/angular.js"));
 
-
             bundles.Add(new ScriptBundle("~/bundles/dependencies")
                 .IncludeDirectory("~/Scripts/angular", "*.js", true));
+
 
             bundles.Add(new ScriptBundle("~/bundles/app")
                 .Include("~/app/app.js")
                 .Include("~/app/app.routes.js")
-                );
+                .IncludeDirectory("~/app/shared", "*.js", true)
+                .IncludeDirectory("~/app/private", "*.js", true));
 
-            bundles.Add(new ScriptBundle("~/bundles/css")
-                .Include("~/Content/Bootstrap.css")
-                .Include("~/Content/Site.css")
-                );
+
+            bundles.Add(new StyleBundle("~/bundles/css")
+                .Include("~/Content/bootstrap.css")
+                .Include("~/Content/Site.css"));
 
             bundles.Add(
                 new DynamicFolderBundle("js", "*.js", false, new JsMinify())
@@ -35,7 +32,9 @@ namespace WebDeveloper.Angular.App_Start
                 new DynamicFolderBundle("css", "*.css", false, new CssMinify())
                 );
 
-            BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = false;
+
+
 
         }
     }
