@@ -99,11 +99,11 @@ namespace WebDeveloper.API.Controllers
         }
 
         [HttpDelete]
-        [Route("")]
-        public IHttpActionResult Delete(Person person)
+        [Route("{id:int}")]
+        public IHttpActionResult Delete(int? id)
         {
-            if (person == null) return BadRequest();
-            person = _repository.GetById(x => x.BusinessEntityID == person.BusinessEntityID);
+            if (!id.HasValue) return BadRequest();
+            var person = _repository.GetById(x => x.BusinessEntityID == id.Value);
             _repository.Delete(person);
             return Ok();
         }

@@ -9,7 +9,7 @@
         <label>Last Name :</label> {{lastName}}
     </div>
     <div>
-        <label>Modified Date:</label> {{modifiedDate}}
+        <label>Modified Date:</label> {{modifiedDate | date: 'MM/dd/yyyy'}}
     </div>
     <ng-transclude></ng-transclude>
 </div>

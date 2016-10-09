@@ -27,8 +27,8 @@
             return $http.put(url, data);
         }
 
-        function deleteData(url, id) {
-            return $http.delete(url, id);
+        function deleteData(url) {
+            return $http.delete(url);
         }
 
     }
