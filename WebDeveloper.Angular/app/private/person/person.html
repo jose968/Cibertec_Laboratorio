@@ -1,6 +1,44 @@
 ﻿<div ng-controller="personController as vm"  >
     <h1>{{vm.title}}</h1>
 
+    <div class="row">
+        <div class="btn-group"
+             uib-dropdown>
+            <button class="btn btn-default"
+                    uib-dropdown-toggle>
+                {{vm.rowSize}}<span class="caret"></span>
+            </button>
+            <ul uib-dropdown-menu role="menu" aria-labellee="single-button">
+                <li role="menuitem"  ng-click="vm-setRowSize(15)" >
+                    <a href>15</a>
+                </li>
+                <li role="menuitem" ng-click="vm-setRowSize(30)">
+                    <a href>30</a>
+                </li>
+                <li role="menuitem" ng-click="vm-setRowSize(50)">
+                    <a href>50</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <ul uib-pagination
+            boundary-links="true"
+            total-items="vm.totalRows"
+            class="pagination-sm nomargin"
+            previous-text ="&lsaquo;"
+            next-text="&rsaquo;"
+            first-text="&laquo;"
+            last-text="&raquo;"
+            max-size="vm.maxSize"
+            items-per-page="vm.rowSize"
+            ng-model="vm.currentPage"
+            ng-change="vm.pageChanged()"
+            ></ul>
+
+
+    </div>
     <a href="" class="btn btn-default" 
        ng-click="vm.create()"
        data-toggle="modal"
@@ -30,6 +68,25 @@
             <span class="glyphicon glyphicon-list"></span> Delete
         </a>
     </person-card>
+
+
+    <div class="row">
+        <ul uib-pagination
+            boundary-links="true"
+            total-items="vm.totalRows"
+            class="pagination-sm nomargin"
+            previous-text="&lsaquo;"
+            next-text="&rsaquo;"
+            first-text="&laquo;"
+            last-text="&raquo;"
+            max-size="vm.maxSize"
+            items-per-page="vm.rowSize"
+            ng-model="vm.currentPage"
+            ng-change="vm.pageChanged()"></ul>
+
+
+    </div>
+
     <modal-popup title="Person" button-title={{vm.buttonTitle}} save-function="vm.modalFunction"
                  read-only="vm.readOnly" is-delete="vm.isDelete">
         <person-edit person="vm.person" read-only="vm.readOnly"></person-edit>

@@ -17,7 +17,10 @@
         vm.readOnly = false;
         vm.isDelete = false;
         vm.buttonTitle = "";
-        
+        vm.totalRows = 0;
+        vm.maxSize = 10;
+        vm.rowSize = 15;
+        vm.currentPage = 1;
         //function
         vm.create = create;
         vm.update = update;
@@ -25,6 +28,8 @@
         vm.delete = modalDelete;
         vm.getPersonDetail = getPersonDetail;
         vm.personUpdate = personUpdate;
+        vm.pageChanged = pageChanged;
+        vm.setRowSize = setRowSize;
 
         vm.modalFunction;
 
@@ -32,12 +37,38 @@
         init();
 
         function init() {
+            totalRows();
             loadData();
+        }
+
+        function totalRows() {
+            var url = apiUrl + '/totalrows';
+            dataService.getData(url)
+                .then(function (result) {
+                    vm.totalRows = result.data;
+                },
+                function (error) {
+                    console.log(error);
+                });
+        }
+
+        function pageChanged() {
+            vm.personList = [];
+            loadData();
+
+        }
+
+        function setRowSize(rowSize) {
+            if (vm.rowSize === rowSize) return;
+            vm.rowSize = rowSize;
+            vm.currentPage = 1;
+            loadData();
+
         }
 
         function loadData() {
             vm.personList = [];
-            var url = apiUrl + 'list/1/15';
+            var url = apiUrl + 'list/'+vm.currentPage+'/'+vm.rowSize;
             dataService.getData(url)
                 .then(function (result) {
                     vm.personList = result.data;
@@ -83,6 +114,7 @@
                 .then(function () {
                     loadData();
                     closeModal();
+                    totalRows();
                 })
         }
 
@@ -91,6 +123,7 @@
                 .then(function () {
                     loadData();
                     closeModal();
+                    totalRows();
                 })
         }
 
@@ -99,6 +132,7 @@
                 .then(function () {
                     loadData();
                     closeModal();
+                    totalRows();
                 })
         }
        

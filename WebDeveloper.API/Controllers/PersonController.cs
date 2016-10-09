@@ -30,6 +30,14 @@ namespace WebDeveloper.API.Controllers
         }
 
         [HttpGet]
+        [Route("totalrows")]
+        public IHttpActionResult Rows()
+        {
+            return Ok(_repository.GetList().Count);
+        }
+
+
+        [HttpGet]
         [Route("{id:int}")]
         public IHttpActionResult Details(int id)
         {
